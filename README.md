@@ -1,5 +1,7 @@
 # Netflix Dashboard 
 
+![Home Page](static/home-page.png)
+
 A web-based dashboard for exploring and analyzing Netflix content (movies and TV shows) using Flask, Pandas, and Plotly. This project is containerized with Docker for easy deployment.
 
 
@@ -13,7 +15,34 @@ This project provides an interactive dashboard to visualize insights from a Netf
 * **Movies & Shows:** Browse and filter Netflix content by title, type, and IMDB score. Displays top 10 movies by IMDB score.
 * **Trends & Analytics:** Visualizes release trends over years using interactive Plotly graphs. (Note: Graph lines were not consistently visible during initial local Docker runs, which might require further debugging.)
 
-## Project Structure
+## Screenshots
+### Movies & Shows Overview
+
+![Top 10 Movies by IMDB Score](static/top-10-movies.png)
+
+*(This section displays a table of top-rated movies by IMDB score.)*
+
+
+
+### Searching and Filtering
+
+![Movie Search](static/movie-search.png)
+
+*(You can search for specific titles.)*
+
+
+
+![Genre-based Filtering](static/genre-based-filtering.png)
+
+*(Filter content based on genres.)*
+
+
+
+### IMDB Score Details
+
+![IMDB Score Example](static/imdb-score.png)
+
+*(Detailed view of IMDB scores for filtered content.)*
 
 ## Dataset
 
