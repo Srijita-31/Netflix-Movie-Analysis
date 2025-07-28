@@ -25,7 +25,6 @@ def get_top_10_movies_imdb():
     ].sort_values(by='imdb_score', ascending=False).head(10)
     return top_movies[['title', 'type', 'imdb_score']].to_dict(orient='records')
 
-# --- MODIFIED Function for Release Year Trend Visualization (Landscape) ---
 def get_release_year_trend_plot():
     release_trend_data = titles_df.groupby('release_year').size().reset_index(name='title_count')
     current_year = pd.Timestamp.now().year
@@ -46,10 +45,9 @@ def get_release_year_trend_plot():
         labels={'release_year': 'Release Year', 'title_count': 'Number of Titles'},
         hover_data={'release_year': True, 'title_count': True},
         color_discrete_sequence=['#3b82f6'],
-        height=plot_height # Keep dynamic height
+        height=plot_height 
     )
 
-    # Update layout for a landscape appearance and cleaner look
     fig.update_layout(
         plot_bgcolor='rgba(0,0,0,0)',
         paper_bgcolor='rgba(0,0,0,0)',
@@ -73,15 +71,14 @@ def get_release_year_trend_plot():
         ),
         bargap=0.2,
         margin=dict(l=100, r=50, t=80, b=50),
-        # --- ADD THIS LINE FOR LANDSCAPE ORIENTATION ---
-        width=900 # Set a fixed width that is greater than common heights (e.g., 600)
-        # You can experiment with this value (e.g., 1000, 1200) to find what looks best
+        
+        width=900 
     )
 
     return pio.to_json(fig)
 
 
-# --- Rest of app.py (unchanged) ---
+
 @app.route('/')
 def index():
     return render_template('index.html')
