@@ -8,20 +8,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* RE-PASTE THE UPDATED COLOR VARIABLES FROM STEP 8 HERE: */
-            --primary-color: #f63b3bff; /* A softer blue, like a corporate or modern tech blue */
-            --secondary-color: #e0f2f7; /* A very light blue-grey */
-            --dark-bg: #1a202c; /* A deep charcoal grey */
-            --text-color: #edf2f7; /* Off-white / light grey for text */
-            --card-bg: #2d3748; /* A slightly lighter charcoal for cards/sections */
-            --border-color: #4a5568; /* A medium grey for borders */
-            --hover-color: #a9e142ff; /* A brighter blue for hover states */
-            --table-row-even: #2f3640; /* Slightly different shade for even table rows */
-            --table-row-hover: #3c4556; /* Hover background for table rows */
+            
+            --primary-color: #f63b3bff; 
+            --secondary-color: #e0f2f7; 
+            --dark-bg: #1a202c; 
+            --text-color: #edf2f7; 
+            --card-bg: #2d3748; 
+            --border-color: #4a5568;
+            --hover-color: #a9e142ff; 
+            --table-row-even: #2f3640; 
+            --table-row-hover: #3c4556; 
         }
 
         html, body {
-            height: 100%; /* Important for sticky footer */
+            height: 100%;
             margin: 0;
             padding: 0;
         }
@@ -31,14 +31,14 @@
             background-color: var(--dark-bg);
             color: var(--text-color);
             line-height: 1.6;
-            display: flex; /* Make body a flex container */
-            flex-direction: column; /* Stack children vertically */
+            display: flex; 
+            flex-direction: column; 
         }
         .container {
             max-width: 1200px;
             margin: 20px auto;
             padding: 0 20px;
-            flex: 1; /* This makes the content area grow and push the footer down */
+            flex: 1; 
         }
         header {
             background-color: var(--primary-color);
@@ -154,7 +154,7 @@
             padding: 20px;
             border-radius: 8px;
         }
-        /* Style plotly plot background to match theme */
+        
         .js-plotly-plot .plotly .main-svg {
             background-color: transparent !important;
         }
@@ -171,7 +171,7 @@
             color: var(--text-color);
             text-align: center;
             padding: 1rem 0;
-            margin-top: auto; /* This pushes the footer to the bottom */
+            margin-top: auto; 
             border-top: 1px solid var(--border-color);
             box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
         }
