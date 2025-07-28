@@ -1,0 +1,76 @@
+{# templates/movies_shows.html #}
+{% extends "base.html" %}
+
+{% block title %}Netflix Movies & Shows{% endblock %}
+
+{% block content %}
+    <section>
+        <h2>Filter & Search Titles</h2>
+        <div class="filter-section">
+            <form action="/movies_shows" method="GET">
+                <label for="genre">Filter by Genre:</label>
+                <select name="genre" id="genre">
+                    <option value="All">All Genres</option>
+                    {% for genre in all_genres %}
+                        <option value="{{ genre }}" {% if genre == selected_genre %}selected{% endif %}>{{ genre }}</option>
+                    {% endfor %}
+                </select>
+
+                <label for="search_query">Search Titles:</label>
+                <input type="text" id="search_query" name="search_query" placeholder="e.g., action, drama" value="{{ search_query if search_query else '' }}">
+
+                <button type="submit">Apply Filters</button>
+            </form>
+        </div>
+
+        {% if display_titles %}
+            <h3>Filtered/Searched Titles (Top 50)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Type</th>
+                        <th>Release Year</th>
+                        <th>Genres</th>
+                        <th>IMDB Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for title in display_titles %}
+                    <tr>
+                        <td>{{ title.title }}</td>
+                        <td>{{ title.type }}</td>
+                        <td>{{ title.release_year }}</td>
+                        <td>{{ title.genres | join(', ') }}</td>
+                        <td>{{ title.imdb_score }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No titles found matching your criteria. Try adjusting your filters or search query.</p>
+        {% endif %}
+    </section>
+
+    <section>
+        <h2>Top 10 Movies by IMDB Score</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Type</th>
+                    <th>IMDB Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for movie in top_movies %}
+                <tr>
+                    <td>{{ movie.title }}</td>
+                    <td>{{ movie.type }}</td>
+                    <td>{{ movie.imdb_score }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+{% endblock %}

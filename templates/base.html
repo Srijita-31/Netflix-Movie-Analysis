@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Netflix Dashboard{% endblock %}</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* RE-PASTE THE UPDATED COLOR VARIABLES FROM STEP 8 HERE: */
+            --primary-color: #f63b3bff; /* A softer blue, like a corporate or modern tech blue */
+            --secondary-color: #e0f2f7; /* A very light blue-grey */
+            --dark-bg: #1a202c; /* A deep charcoal grey */
+            --text-color: #edf2f7; /* Off-white / light grey for text */
+            --card-bg: #2d3748; /* A slightly lighter charcoal for cards/sections */
+            --border-color: #4a5568; /* A medium grey for borders */
+            --hover-color: #a9e142ff; /* A brighter blue for hover states */
+            --table-row-even: #2f3640; /* Slightly different shade for even table rows */
+            --table-row-hover: #3c4556; /* Hover background for table rows */
+        }
+
+        html, body {
+            height: 100%; /* Important for sticky footer */
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex; /* Make body a flex container */
+            flex-direction: column; /* Stack children vertically */
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+            flex: 1; /* This makes the content area grow and push the footer down */
+        }
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        nav {
+            background-color: var(--card-bg);
+            padding: 0.8rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            border-bottom: 1px solid var(--border-color);
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        nav ul li a:hover, nav ul li a.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        section {
+            background-color: var(--card-bg);
+            padding: 30px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 50vw;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: var(--table-row-even);
+        }
+        tr:hover {
+            background-color: var(--table-row-hover);
+        }
+        .filter-section {
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--table-row-even);
+            border-radius: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+        }
+        .filter-section label {
+            margin-right: 5px;
+            color: var(--text-color);
+        }
+        .filter-section select,
+        .filter-section input[type="text"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+            background-color: #333;
+            color: var(--text-color);
+            outline: none;
+        }
+        .filter-section button {
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .filter-section button:hover {
+            background-color: var(--hover-color);
+        }
+        .plot-container {
+            margin-top: 20px;
+            background-color: var(--table-row-even);
+            padding: 20px;
+            border-radius: 8px;
+        }
+        /* Style plotly plot background to match theme */
+        .js-plotly-plot .plotly .main-svg {
+            background-color: transparent !important;
+        }
+        .modebar-container {
+            background-color: var(--border-color) !important;
+            border-radius: 5px;
+        }
+        .modebar-btn {
+            fill: var(--text-color) !important;
+        }
+
+        footer {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: auto; /* This pushes the footer to the bottom */
+            border-top: 1px solid var(--border-color);
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+        }
+        footer p {
+            margin: 0;
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Netflix Dashboard</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="/" class="{% if request.path == '/' %}active{% endif %}">Home</a></li>
+            <li><a href="/movies_shows" class="{% if request.path == '/movies_shows' %}active{% endif %}">Movies & Shows</a></li>
+            <li><a href="/trends" class="{% if request.path == '/trends' %}active{% endif %}">Trends & Analytics</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+    <footer>
+        <p>Project by: Srijita Ghorai</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{# templates/index.html #}
+{% extends "base.html" %}
+
+{% block title %}Welcome to Netflix Dashboard{% endblock %}
+
+{% block content %}
+    <section>
+        <h2>Welcome to the Netflix Content Dashboard!</h2>
+        <p>Explore insights into Netflix movies and TV shows. Use the navigation above to:</p>
+        <ul>
+            <li><strong>Movies & Shows:</strong> Filter and search content by genre, title, and see top-rated films.</li>
+            <li><strong>Trends & Analytics:</strong> Visualize content release trends, genre popularity, and more.</li>
+        </ul>
+        <p>This dashboard is built using Flask, Pandas for data analysis, Plotly for visualizations, and deployed with Docker.</p>
+    </section>
+{% endblock %}
